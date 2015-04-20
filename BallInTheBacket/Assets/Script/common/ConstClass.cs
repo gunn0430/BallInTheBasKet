@@ -51,5 +51,8 @@ public class ConstClass : MonoBehaviour {
 	//end_pause時の待ち時間
 	public const float END_PAUSE_INTERVAL = 1f;
 
-	
+	//BGMの音量
+	public const string BGM_VOLUME_KEY = "bgm_volume_key";
+	//SEの音量
+	public const string SE_VOLUME_KEY = "se_volume_key";
 }

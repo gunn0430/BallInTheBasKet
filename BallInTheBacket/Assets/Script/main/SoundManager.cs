@@ -5,21 +5,24 @@ public class SoundManager : MonoBehaviour {
 	public AudioSource[] audioSource = new AudioSource[1];
 	public AudioClip[] BGM = new AudioClip[7];
 	public AudioClip[] SE = new AudioClip[3];
-
+	//BGMのボリューム
+	public float bgmVol = 0.5f;
+	//SEのボリューム
+	public float seVol = 0.5f;
 	string nowBGM;
 
-	// Use this for initialization
 	void Awake () {
 		BGM = Resources.LoadAll<AudioClip>("Sound");
 		SE[0] = Resources.Load<AudioClip>("SE/button");
 		SE[1] = Resources.Load<AudioClip>("SE/clear");
 		SE[2] = Resources.Load<AudioClip>("SE/ball");
 		audioSource = gameObject.GetComponents<AudioSource>();
+		GetVolume ();
+		SetAudioVolume ();
 		BGMStart();
 
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		if(!audioSource[0].isPlaying){
 			BGMStart();
@@ -46,8 +49,28 @@ public class SoundManager : MonoBehaviour {
 	
 	//ボールが何かにぶつかった時のSE
 	public void BallSE(AudioSource audio){
+		audio.volume = seVol;
 		audio.PlayOneShot (SE[2]);
 	}
-	
 
+	
+	//音量を取得
+	public void GetVolume () {
+		if (PlayerPrefs.HasKey (ConstClass.BGM_VOLUME_KEY)) {
+			bgmVol = PlayerPrefs.GetFloat (ConstClass.BGM_VOLUME_KEY);
+		} else {
+			bgmVol = 0.5f;
+		}
+		if (PlayerPrefs.HasKey (ConstClass.SE_VOLUME_KEY)) {
+			seVol = PlayerPrefs.GetFloat (ConstClass.SE_VOLUME_KEY);
+		} else {
+			seVol = 0.5f;
+		}
+	}
+
+	//audiosourceの音量を設定
+	public void  SetAudioVolume(){
+		audioSource [0].volume = bgmVol;
+		audioSource [1].volume = seVol;
+	}
 }
