@@ -1,13 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/common/ConstClass.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/main/CameraManager.cs">
     <Files>
       <File FileName="Assets/Script/main/InputManager.cs" Line="54" Column="24" />
       <File FileName="Assets/Script/main/PowerGage.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/main/CanvasManager_main.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/main/GameManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/common/RankingData.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/common/ConstClass.cs" Line="57" Column="27" />
+      <File FileName="Assets/Script/common/ConstClass.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/main/DirectionManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/main/ShootManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/main/BallScript.cs" Line="1" Column="1" />
@@ -16,6 +16,9 @@
       <File FileName="Assets/Script/main/LifeManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/title/RankingManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Script/main/SoundManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/title/OptionManager.cs" Line="26" Column="1" />
+      <File FileName="Assets/Script/title/SoundManager_title.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/main/CameraManager.cs" Line="120" Column="58" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -23,10 +26,18 @@
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Script" expanded="True">
               <Node name="common" expanded="True" />
-              <Node name="main" expanded="True" />
+              <Node name="main" expanded="True">
+                <Node name="CameraManager.cs" selected="True" />
+              </Node>
               <Node name="title" expanded="True" />
             </Node>
-            <Node name="OptionManager.cs" selected="True" />
+          </Node>
+          <Node name="Assembly-CSharp-firstpass" expanded="True">
+            <Node name="Standard Assets" expanded="True">
+              <Node name="Cameras" expanded="True">
+                <Node name="Scripts" expanded="True" />
+              </Node>
+            </Node>
           </Node>
         </State>
       </Pad>

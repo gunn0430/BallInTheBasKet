@@ -12,6 +12,7 @@ public class CameraManager : MonoBehaviour {
 	Camera camera_right;
 	Camera camera_top;
 
+	//列挙体の宣言
 	public enum CameraEnable{
 		mainCamera = 0,
 		leftCamera,
@@ -22,6 +23,10 @@ public class CameraManager : MonoBehaviour {
 
 //	GameManager GManaget;
 	InputManager inputManager;
+
+	Vector2 leftCameraRotation = new Vector2(0,0);
+	Vector2 rightCameraRotation = new Vector2(0,0);
+	Vector2 topCameraRotation = new Vector2(0,0);
 
 	void Awake () {
 		camera_main = gameObject.GetComponent<Camera> ();
@@ -37,6 +42,13 @@ public class CameraManager : MonoBehaviour {
 	void Update () {
 		if(inputManager.isChangeKeyDown){
 			ChangeCamera(activeCamera);
+		}
+		//メインカメラ以外の時、カメラ角度を調整できる
+		if(activeCamera != CameraEnable.mainCamera){
+			//マウスドラッグ時
+			if( Input.GetMouseButton(0)){
+				ChangeCameraRotation();
+			}
 		}
 	}
 
@@ -96,5 +108,39 @@ public class CameraManager : MonoBehaviour {
 			SetMainCamera();
 			break;
 		}
+	}
+	public float x;	public float y;	public float z;
+	//カメラ角度調節
+	public void ChangeCameraRotation(){
+		Vector3 target;
+		//スクリーン上でのマウスの位置を取得
+		Vector3 mousePos = Input.mousePosition;
+		switch(activeCamera){
+		case CameraEnable.leftCamera:
+			//カメラ操作の調整
+			target = camera_left.ScreenToViewportPoint(mousePos);
+			left.transform.rotation = Quaternion.LookRotation(target);
+			break;
+		case CameraEnable.rightCamera:
+			//カメラ操作の調整
+			target = camera_right.ScreenToViewportPoint(new Vector3(mousePos.x * -1,mousePos.y,mousePos.z * -1));
+			right.transform.rotation = Quaternion.LookRotation(target);
+			break;
+		case CameraEnable.topCamera:
+			//カメラ操作の調整
+//			target = camera_top.ScreenToViewportPoint(new Vector3(mousePos.x * x,mousePos.y - y,mousePos.z * z));
+//			top.transform.rotation = Quaternion.LookRotation(target);
+			break;
+		}	
+	}
+
+	//カメラの回転量を計算
+	Vector2 CalcRotation(Vector2 cameraRotate,float X,float Y){
+		float tmpX = cameraRotate.x + X;
+		float tmpY = cameraRotate.y + Y;
+		//方向の限界を超えないように制限
+		tmpX = Mathf.Clamp (tmpX, ConstClass.CAMERA_ROTATION_X_MIN, ConstClass.CAMERA_ROTATION_X_MAX);
+		tmpY = Mathf.Clamp (tmpY, ConstClass.CAMERA_ROTATION_Y_MIN, ConstClass.CAMERA_ROTATION_Y_MAX);
+		return new Vector2(tmpX,tmpY);
 	}
 }
